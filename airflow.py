@@ -51,7 +51,7 @@ def dust_density():
     # 미세먼지 농도 계산
     voltage = value * 3.3 / 255 # PCF8591의 입력 전압 범위는 0~3.3V
     dust_density = 0.17 * voltage - 0.1 # GP2Y1014AU의 선형 방정식을 이용하여 미세먼지 농도 계산
-    return dust_density
+    return dust_density *100
 
 # Define GP2Y1014AU dust sensor parameters
 VCC = 5.0  # Supply voltage
