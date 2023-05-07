@@ -99,7 +99,7 @@ def read_gas(gas_type):
         return -1
     ratio = RS / RO_CLEAN_AIR
     gas = GAS_R0 * (ratio ** GAS_SLOPE)
-    return gas*100
+    return gas
 
 
 def gas_concentration():
