@@ -51,7 +51,7 @@ def dust_density():
     # 미세먼지 농도 계산
     voltage = value * 3.3 / 255 # PCF8591의 입력 전압 범위는 0~3.3V
     dust_density = 0.17 * voltage - 0.1 # GP2Y1014AU의 선형 방정식을 이용하여 미세먼지 농도 계산
-    return dust_density *100
+    return dust_density*100
 
 # Define GP2Y1014AU dust sensor parameters
 VCC = 5.0  # Supply voltage
@@ -99,7 +99,7 @@ def read_gas(gas_type):
         return -1
     ratio = RS / RO_CLEAN_AIR
     gas = GAS_R0 * (ratio ** GAS_SLOPE)
-    return gas
+    return gas*100
 
 
 def gas_concentration():
@@ -158,7 +158,7 @@ while (1) :
                     newmsg=pynmea2.parse(newdata.decode())
                     lat=newmsg.latitude
                     lng=newmsg.longitude
-                    gps = "Latitude=" + str(lat) + "and Longitude=" + str(lat)
+                    gps = "Latitude=" + str(lat) + "and Longitude=" + str(lng)
                     print(gps)
                     
                     doc_air = db.collection(u'airflow').document()
@@ -172,7 +172,7 @@ while (1) :
                         u'Gas_lpg' : round(gas_lpg,6),
                         u'Gas_smoke' : round(gas_smoke,6),
                         u'Latitude' : round(float(lat), 6),
-                        u'Logitude' : round(float(lat), 6),
+                        u'Logitude' : round(float(lng), 6),
                         u'Time': datetime.now().strftime('%Y.%m.%d - %H:%M:%S'),
                         u'Check' : True,      
                     })
